@@ -10,12 +10,21 @@ library.add(faSearch, faShoppingCart);
 
 export default function Navbar() {
   const { cartItems, showCart, setShowCart } = useCart();
-  
-  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  type CartItem = {
+  id: number;
+  name: string;
+  quantity: number;
+  // other fields if needed
+};
+
+const totalItems = cartItems.reduce(
+  (sum: number, item: CartItem) => sum + item.quantity,
+  0
+);
+
   const { address, isConnected } = useAccount();
   const { data: balanceData } = useBalance({
     address,
-    enabled: !!address,
   })
 
   const formatAddress = (addr: string | undefined) =>

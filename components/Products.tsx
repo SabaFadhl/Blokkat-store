@@ -14,25 +14,32 @@ export default function Products() {
     functionName: "getAllProducts",
   });
 
-  useEffect(() => {
-    if (data) {
-      const parsed = data.map((p: any) => ({
-        id: Number(p.id),
-        name: p.name,
-        image: p.image,
-        fiatPrice: Number(p.fiatPrice), 
-        quantity: Number(p.quantity),
-      }));
-      setProducts(parsed);
-    }
-  }, [data]);
+useEffect(() => {
+  if (Array.isArray(data)) {
+    const parsed =(data as any[]).map((p: any) => ({
+      id: Number(p.id),
+      name: p.name,
+      image: p.image,
+      fiatPrice: Number(p.fiatPrice),
+      quantity: Number(p.quantity),
+    }));
+    setProducts(parsed);
+  }
+}, [data]);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading products.</p>;
 
   const { addToCart, setShowCart } = useCart();
+  type Product = {
+    id: number;
+    name: string;
+    image: string;
+    fiatPrice: number;
+    quantity: number;
+  };
 
-  const handleAddToCart = (product) => {
+  const handleAddToCart = (product: Product) => {
     addToCart(product);
     setShowCart(true);
   };
