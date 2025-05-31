@@ -81,7 +81,7 @@ export default function CartDrawer({ isOpen, onClose }) {
             <span className="font-medium">Total:</span>
             <div className="text-right">
               <div className="font-semibold text-indigo-600">{totalFiat.toFixed(3)} $</div>
-              <div className="font-semibold text-indigo-600">{totalCrypto.toFixed(5)} ETH</div>
+              {/* <div className="font-semibold text-indigo-600">{totalCrypto.toFixed(5)} ETH</div> */}
             </div>
           </div>
           <div className="space-y-2">
